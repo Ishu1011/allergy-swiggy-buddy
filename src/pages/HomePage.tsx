@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import SearchBar from '@/components/SearchBar';
-import AllergyToggle from '@/components/AllergyToggle';
+import SettingsPanel from '@/components/SettingsPanel';
 import DishCard from '@/components/DishCard';
 import RestaurantCard from '@/components/RestaurantCard';
 import BottomNavbar from '@/components/BottomNavbar';
@@ -29,8 +29,8 @@ const HomePage: React.FC = () => {
         showLocation
       />
 
-      {/* Allergy Toggle */}
-      <AllergyToggle />
+      {/* Settings Panel (Allergy + Theme) */}
+      <SettingsPanel />
 
       {/* Popular Dishes Section */}
       <section className="px-4 mb-6">
