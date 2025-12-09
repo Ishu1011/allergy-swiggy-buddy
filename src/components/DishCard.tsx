@@ -3,7 +3,7 @@ import { useAllergyMode } from '@/contexts/AllergyModeContext';
 import { useUserAllergies } from '@/hooks/useUserAllergies';
 import { checkDishSafety, AllergenSummary } from '@/utils/allergenUtils';
 import AllergyBadge from './AllergyBadge';
-import { UtensilsCrossed } from 'lucide-react';
+import { UtensilsCrossed, Star } from 'lucide-react';
 
 interface DishCardProps {
   id: number;
@@ -11,6 +11,7 @@ interface DishCardProps {
   description: string;
   price?: number;
   image?: string | null;
+  rating?: number;
   allergenSummary: AllergenSummary | null;
   onClick?: () => void;
 }
@@ -20,6 +21,7 @@ const DishCard: React.FC<DishCardProps> = ({
   description,
   price,
   image,
+  rating,
   allergenSummary,
   onClick,
 }) => {
@@ -27,6 +29,12 @@ const DishCard: React.FC<DishCardProps> = ({
   const { allergies } = useUserAllergies();
 
   const checkResult = checkDishSafety(allergenSummary, allergies);
+
+  const getRatingColor = (r: number) => {
+    if (r >= 4) return 'bg-green-600';
+    if (r >= 3) return 'bg-orange-500';
+    return 'bg-red-500';
+  };
 
   return (
     <div
@@ -50,15 +58,26 @@ const DishCard: React.FC<DishCardProps> = ({
 
       {/* Dish Info */}
       <div className="flex-1 min-w-0">
-        <h3 className="font-semibold text-foreground text-base truncate">
-          {name}
-        </h3>
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="font-semibold text-foreground text-base truncate max-w-[65%]">
+            {name}
+          </h3>
+          {rating !== undefined && rating > 0 && (
+            <div
+              className={`flex items-center gap-1 text-white text-xs px-2 py-0.5 rounded-full ${getRatingColor(rating)}`}
+            >
+              <Star className="w-3 h-3 fill-current" />
+              <span>{rating.toFixed(1)}</span>
+            </div>
+          )}
+        </div>
+
         <p className="text-sm text-muted-foreground line-clamp-2 mt-1">
           {description}
         </p>
         
         <div className="flex items-center justify-between mt-2">
-          {price && (
+          {price !== undefined && (
             <p className="font-semibold text-foreground">₹{price}</p>
           )}
           

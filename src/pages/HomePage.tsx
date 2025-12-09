@@ -5,6 +5,7 @@ import SettingsPanel from '@/components/SettingsPanel';
 import DishCard from '@/components/DishCard';
 import RestaurantCard from '@/components/RestaurantCard';
 import BottomNavbar from '@/components/BottomNavbar';
+import ChatbotWidget from '@/components/Chatbot/ChatbotWidget';
 import { mockDishes, mockRestaurants } from '@/hooks/useApi';
 import { ChevronRight } from 'lucide-react';
 
@@ -102,6 +103,9 @@ const HomePage: React.FC = () => {
           ))}
         </div>
       </section>
+
+      {/* Chatbot Widget */}
+      <ChatbotWidget />
 
       <BottomNavbar />
     </div>

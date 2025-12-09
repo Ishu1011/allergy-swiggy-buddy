@@ -14,6 +14,7 @@ import HomePage from "./pages/HomePage";
 import SearchPage from "./pages/SearchPage";
 import RestaurantPage from "./pages/RestaurantPage";
 import ProfilePage from "./pages/ProfilePage";
+import CartPage from "./pages/CartPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -60,6 +61,14 @@ const App = () => (
                   element={
                     <ProtectedRoute>
                       <ProfilePage />
+                    </ProtectedRoute>
+                  }
+                />
+                <Route
+                  path="/cart"
+                  element={
+                    <ProtectedRoute>
+                      <CartPage />
                     </ProtectedRoute>
                   }
                 />
